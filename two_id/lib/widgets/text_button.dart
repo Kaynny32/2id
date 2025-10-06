@@ -29,6 +29,7 @@ class _TextButtonCustomState extends State<TextButtonCustom> {
        style: TextStyle(
         color: widget.colorText,
         fontSize: widget.fontSize,
+        fontWeight: FontWeight.bold,
        ),
       )
     );

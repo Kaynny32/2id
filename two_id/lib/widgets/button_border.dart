@@ -21,23 +21,40 @@ class _ButtonBorderState extends State<ButtonBorder> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 200,
-      height: 40,
+      width: 206,
+      height: 48,
       child: ElevatedButton(        
         style: ButtonStyle(
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15.0),
+              borderRadius: BorderRadius.circular(20.0),
               side: BorderSide(color: Colors.black)
             )
-          )
+          ),
+          padding: MaterialStateProperty.all(EdgeInsets.zero),
         ),
-        onPressed: ()=>widget.onPressed(), 
-        child: Row(
-          children: [
-            Expanded(flex: 2, child: Text(widget.nameButton, style: TextStyle(fontSize: 12),)),
-            Expanded(flex: 1,child:  Icon(widget.icon, size: 25,color: Color.fromRGBO(21, 132, 236, 100),)),
-          ],
+        onPressed: () => widget.onPressed(), 
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                widget.nameButton, 
+                style: TextStyle(
+                  fontSize: 16, 
+                  color: Color.fromRGBO(22, 22, 22, 1.0)
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+              CircleAvatar(
+                radius: 16,
+                backgroundColor: Color.fromRGBO(21, 132, 236, 100),
+                child: Icon(widget.icon, size: 24, color: Colors.white),
+              ),
+            ],
+          ),
         )
       ),
     );
