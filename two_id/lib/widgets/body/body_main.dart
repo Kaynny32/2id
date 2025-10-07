@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:two_id/widgets/body/block/build_first_block.dart';
-import 'package:two_id/widgets/body/block/build_second_block.dart';
+import 'package:two_id/widgets/body/block/first_build_block.dart';
+import 'package:two_id/widgets/body/block/second_build_block.dart';
+
 
 class BodyMain extends StatefulWidget {
   const BodyMain({super.key});
@@ -13,28 +14,25 @@ class _BodyMainState extends State<BodyMain> {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    //final screenHeight = MediaQuery.of(context).size.height;
     
-    // Определяем тип устройства на основе ширины экрана
     bool isMobile = screenWidth < 600;
-    bool isTablet = screenWidth >= 600 && screenWidth < 1200;
-    bool isDesktop = screenWidth >= 1200;
+    //bool isDesktop = screenWidth >= 1200;
 
     return SafeArea(
       child: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: _responsiveValue(75, 50, 30, isMobile, isTablet)),
+            SizedBox(height: _responsiveValue(75, 30, isMobile, )),
             
             // Первый блок
-            BuildFirstBlock(isMobile: isMobile, isTablet:  isTablet, isDesktop:  isDesktop),
+            FirstBuildBlock(isMobile: isMobile),
             
-            SizedBox(height: _responsiveValue(75, 50, 30, isMobile, isTablet)),
+            SizedBox(height: _responsiveValue(75, 30, isMobile, )),
             
             // Второй блок
-            BuildSecondBlock(isMobile: isMobile, isTablet:  isTablet, isDesktop:  isDesktop),
+            SecondBuildBlock(isMobile: isMobile,),
 
-            SizedBox(height: _responsiveValue(75, 50, 30, isMobile, isTablet)),
+            SizedBox(height: _responsiveValue(75,  30, isMobile)),
           ],
         ),
       ),
@@ -42,9 +40,8 @@ class _BodyMainState extends State<BodyMain> {
   }
 
   // Вспомогательная функция для адаптивных значений
-  double _responsiveValue(double desktop, double tablet, double mobile, bool isMobile, bool isTablet) {
+  double _responsiveValue(double desktop, double mobile, bool isMobile) {
     if (isMobile) return mobile;
-    if (isTablet) return tablet;
     return desktop;
   }
 }

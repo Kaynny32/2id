@@ -1,25 +1,20 @@
 import 'package:flutter/material.dart';
 
-class BuildFirstBlock extends StatefulWidget {
+class FirstBuildBlock extends StatefulWidget {
   final bool isMobile;
-  final bool isTablet;
-  final bool isDesktop;
 
-
-  const BuildFirstBlock(
+  const FirstBuildBlock(
     {
       super.key,
-      required this.isMobile, 
-      required this.isTablet,
-      required this.isDesktop
+      required this.isMobile,
     }
   );
 
   @override
-  State<BuildFirstBlock> createState() => _BuildFirstBlockState();
+  State<FirstBuildBlock> createState() => _FirstBuildBlockState();
 }
 
-class _BuildFirstBlockState extends State<BuildFirstBlock> {
+class _FirstBuildBlockState extends State<FirstBuildBlock> {
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -27,13 +22,13 @@ class _BuildFirstBlockState extends State<BuildFirstBlock> {
       children: [
         Container(
           width: _responsiveValue(
-            MediaQuery.of(context).size.width * 0.99, // десктоп
-            MediaQuery.of(context).size.width * 0.95, // планшет
-            MediaQuery.of(context).size.width * 0.92, // мобильный
+            MediaQuery.of(context).size.width * 0.99,
+            MediaQuery.of(context).size.width * 0.99,
             widget.isMobile,
-            widget.isTablet
           ),
-          height: _responsiveValue(350, 250, 200, widget.isMobile, widget.isTablet),
+          height: _responsiveValue(
+            600,350,widget.isMobile
+          ),
           decoration: BoxDecoration(
             color: Color.fromRGBO(255, 255, 255, 1),
             borderRadius: BorderRadius.circular(16),
@@ -41,14 +36,11 @@ class _BuildFirstBlockState extends State<BuildFirstBlock> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Первая строка текста
               SizedBox(
                 width: _responsiveValue(
                   MediaQuery.of(context).size.width * 0.90,
-                  MediaQuery.of(context).size.width * 0.85,
                   MediaQuery.of(context).size.width * 0.80,
-                  widget.isMobile,
-                  widget.isTablet
+                  widget.isMobile,                  
                 ),
                 child: Row(                          
                   children: [
@@ -57,7 +49,7 @@ class _BuildFirstBlockState extends State<BuildFirstBlock> {
                         'Команда, способная', 
                         style: TextStyle(
                           color: Color.fromRGBO(22, 22, 22, 1.0), 
-                          fontSize: _responsiveValue(90, 60, 32, widget.isMobile, widget.isTablet),
+                          fontSize: _responsiveValue(90, 32, widget.isMobile),
                           fontWeight: FontWeight.bold,
                         ),
                         maxLines: 1,
@@ -68,16 +60,14 @@ class _BuildFirstBlockState extends State<BuildFirstBlock> {
                 ),
               ),
               
-              SizedBox(height: _responsiveValue(20, 15, 10, widget.isMobile, widget.isTablet)),
+              SizedBox(height: _responsiveValue(20, 10, widget.isMobile)),
               
               // Вторая строка с кнопкой и текстом
               SizedBox(
                 width: _responsiveValue(
                   MediaQuery.of(context).size.width * 0.90,
-                  MediaQuery.of(context).size.width * 0.85,
                   MediaQuery.of(context).size.width * 0.80,
                   widget.isMobile,
-                  widget.isTablet
                 ),
                 child: Row(                          
                   children: [
@@ -88,8 +78,8 @@ class _BuildFirstBlockState extends State<BuildFirstBlock> {
                         backgroundColor: MaterialStatePropertyAll(Color.fromRGBO(21, 132, 236, 1.0)),
                         shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(90))),
                         padding: MaterialStatePropertyAll(EdgeInsets.symmetric(
-                          horizontal: _responsiveValue(30, 20, 15, widget.isMobile, widget.isTablet),
-                          vertical: _responsiveValue(20, 15, 10, widget.isMobile, widget.isTablet),
+                          horizontal: _responsiveValue(30, 15, widget.isMobile),
+                          vertical: _responsiveValue(20, 10, widget.isMobile),
                         )),
                       ),
                       onPressed: (){},
@@ -98,14 +88,14 @@ class _BuildFirstBlockState extends State<BuildFirstBlock> {
                           Text(
                             'увеличить',
                             style: TextStyle(
-                              fontSize: _responsiveValue(90, 60, 32, widget.isMobile, widget.isTablet),
+                              fontSize: _responsiveValue(90, 32, widget.isMobile),
                               color: Colors.white,
                             ),
                           ),
-                          SizedBox(width: _responsiveValue(10, 8, 5, widget.isMobile, widget.isTablet)),
+                          SizedBox(width: _responsiveValue(10, 5, widget.isMobile)),
                           Icon(
                             Icons.arrow_outward_rounded, 
-                            size: _responsiveValue(90, 60, 32, widget.isMobile, widget.isTablet),
+                            size: _responsiveValue(90, 32, widget.isMobile),
                             color: Colors.white,
                           ),
                         ],
@@ -155,16 +145,13 @@ class _BuildFirstBlockState extends State<BuildFirstBlock> {
                       ],
                     ),
 
-                    if (!widget.isMobile) // На планшетах и десктопах - текст рядом
-                    SizedBox(width: _responsiveValue(30, 20, 15, widget.isMobile, widget.isTablet)),
-
                     if (!widget.isMobile)
                     Expanded(
                       child: Text(
                         'продажи', 
                         style: TextStyle(
                           color: Color.fromRGBO(22, 22, 22, 1.0), 
-                          fontSize: _responsiveValue(90, 60, 32, widget.isMobile, widget.isTablet),
+                          fontSize: _responsiveValue(90, 32, widget.isMobile),
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -178,9 +165,8 @@ class _BuildFirstBlockState extends State<BuildFirstBlock> {
       ],
     );
   }
-  double _responsiveValue(double desktop, double tablet, double mobile, bool isMobile, bool isTablet) {
+  double _responsiveValue(double desktop, double mobile, bool isMobile) {
     if (isMobile) return mobile;
-    if (isTablet) return tablet;
     return desktop;
   }
 }
